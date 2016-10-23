@@ -1,0 +1,22 @@
+default:
+    extensions:
+        Behat\MinkExtension:
+            default_session: selenium2
+            goutte: ~
+            selenium2:
+                # chrome
+                wd_host: "http://127.0.0.1:4444/wd/hub"
+                # chrome
+                capabilities: { "browserName": "chrome", "browser": "chrome", "version":  "25", 'chrome': {'switches':['--no-sandbox']}}
+            base_url: 'https://sandbox.payever.de/store/test-paypal-business/marketing/personal-offer-from-test-paypal-business-1#product/'
+            # chrome
+            browser_name: chrome
+            files_path: 'files'
+        SensioLabs\Behat\PageObjectExtension:
+            namespaces:
+                page:
+                    - Page
+    suites:
+        default:
+            contexts:
+                - FeatureContext
