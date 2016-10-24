@@ -205,4 +205,11 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext
         assert($this->amountValue, $this->paymentPage->getTotalValue());
     }
 
+    /**
+     * @Then /^I proceed payment$/
+     */
+    public function iProceedPayment(){
+        $this->payPalPage->agreeWithPayment();
+    }
+
 }

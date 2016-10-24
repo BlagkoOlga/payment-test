@@ -124,11 +124,12 @@ Feature: Payment Form
     And I fill user address data: "<street>", "<number>", "<country>", "<city>", "<zipcode>"
     And I charge payment with "<email>"
     And I login on PayPal with: "<email>" and "<password>"
-    Then I check amount value
-
+    And I wait for the page to be loaded
+    And I proceed payment
+    Then I should see text matching "Payment successfull"
     Examples:
       |salutation   |firstname|lastname|street     |number|country  |city         |zipcode|email                |password  |
-      |SALUTATION_MR|Julia    |Max     |Broadway Av|200   |Australia|WEST BEACH SA|5024   |baloonisred@gmail.com|1q2w3e4r5t|
+      |SALUTATION_MR|Julia    |Max     |Broadway Av|200   |Australia|WEST BEACH SA|5024   |blagko.olga-buyer@gmail.com|1q2w3e4r5t|
 
 
 

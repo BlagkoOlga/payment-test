@@ -15,11 +15,13 @@ class PayPalPage extends Page
 {
     protected $elements = array(
         'iframe' => array('css' => '#injectedUnifiedLogin>iframe'),
-        'email'=>'#email',
-        'password'=>'#password',
-        'loginButton'=>'#btnLogin',
-        'proceedButton'=>'#proceedButton',
-        'amount'=>'.ltrOverride.ng-binding'
+        'email'=>array('css' => '#email'),
+        'password'=>array('css' => '#password'),
+        'loginButton'=>array('css' => '#btnLogin'),
+        'agreeCheckbox'=>array('css' => '#agree'),
+        'agreeAndContinueButton'=>array('css'=>'#submitEConsent'),
+        'amountValue'=>array('css'=>'#totalWrapper [ng-bind-html=\'amount_formatted\']'),
+        'confirmPayment'=>array('css'=>'#confirmButtonTop')
 
     );
 
@@ -35,9 +37,16 @@ class PayPalPage extends Page
         $this->getElement('loginButton')->click();
 
         $this->getSession()->switchToWindow(null);
+        $this->getSession()->wait(10000, 'window.jQuery !== undefined');
     }
 
     public function getAmount(){
-        return $this->getElement('amount')->getText();
+        return $this->getElement('amountValue')->getText();
+    }
+
+    public function agreeWithPayment(){
+        $this->getElement('confirmPayment')->click();
+
+        $this->getSession()->wait(10000, 'window.jQuery !== undefined');
     }
 }
